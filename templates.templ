@@ -2,13 +2,28 @@ package main
 
 import "time"
 
+
 templ Main() {
     @Layout() {
         <div data-on-load="@get('/clock')">
             <h1>Hello, World!</h1>
             @Clock()
         </div>
+		<div data-signals="{ in: '' }"> 
+			<input data-bind-in data-on-keydown__debounce.100ms="@get('/output')" />
+		</div>
+		@Output(nil)
     }
+}
+
+templ Output(data []string ) {
+	<div id="output">
+		<ul>
+			for _, v := range data {
+				<li>{ v }</li>
+			}
+		</ul>
+	</div>
 }
 
 templ Clock() {
