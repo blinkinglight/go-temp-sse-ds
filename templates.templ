@@ -1,0 +1,28 @@
+package main
+
+import "time"
+
+templ Main() {
+    @Layout() {
+        <div data-on-load="@get('/clock')">
+            <h1>Hello, World!</h1>
+            @Clock()
+        </div>
+    }
+}
+
+templ Clock() {
+    <h2 id="time">The time is { time.Now().Format("15:04:05") }</h2>
+}
+
+templ Layout() {
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@v1.0.0-beta.8/bundles/datastar.js"></script>
+		</head>
+		<body>
+			{ children... }
+		</body>
+	</html>
+}
